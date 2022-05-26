@@ -1,17 +1,23 @@
 package br.com.springboot.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jdk.jfr.Name;
+import lombok.*;
 
-@Getter
-@Setter
+import javax.persistence.*;
+
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Entity
+@Table(name="xxtwo_users")
+public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="name")
     private String name;
+    @Column(name="username")
     private String username;
 
 

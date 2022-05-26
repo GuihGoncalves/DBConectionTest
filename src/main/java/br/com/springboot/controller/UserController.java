@@ -1,6 +1,8 @@
 package br.com.springboot.controller;
 
 import br.com.springboot.model.User;
+import br.com.springboot.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,21 +12,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
+    //@Autowired
+    //private UserRepository userRepository;
 
     @GetMapping("/{id}")
     public User user(@PathVariable("id") Long id){
         Optional<User> userFind = users.stream().filter(user -> user.getId().equals(id)).findFirst();
 
-        if(userFind.isPresent()){
-            return userFind.get();
-        }
+        return userFind.orElse(null);
 
-        return null;
     }
 
     @PostMapping("/")
     public User user(@RequestBody User user){
+        //this.userRepository.save(user);
         users.add(user);
         return user;
     }
